@@ -1,0 +1,34 @@
+# depslib dependency file v1.0
+1702260193 source:c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\main.c
+	<stdio.h>
+	<stdlib.h>
+	"arquivo.h"
+	"arquivo.c"
+	"produto.h"
+	"produto.c"
+	"vendas.h"
+	"vendas.c"
+
+1702260053 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\arquivo.h
+	"produto.h"
+	"vendas.h"
+
+1702259303 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\produto.h
+
+1702259671 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\vendas.h
+
+1702260528 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\produto.c
+	<stdlib.h>
+	<stdio.h>
+	"produto.h"
+
+1702259879 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\arquivo.c
+	<stdlib.h>
+	<stdio.h>
+	"arquivo.h"
+
+1702260087 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\vendas.c
+	<stdlib.h>
+	<stdio.h>
+	"vendas.h"
+

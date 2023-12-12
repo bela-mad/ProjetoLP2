@@ -2,63 +2,72 @@
 #include <stdio.h>
 #include "arquivo.h"
 
-void salva_produto(Produto *produto, int *qtdeProd){
+void salva_produto(Produto *produto, int qtdeProd) {
 
     FILE *fp_prod;
-    fp_prod = fopen("Estoque de Produtos.txt", "w");
+    fp_prod = fopen("Estoque de Produtos.txt", "wb");
 
     if(fp_prod == NULL){
-        perror("\nNão foi possivel abrir o arquivo");
+        perror("\nNao foi possivel abrir o arquivo");
     }
-
-    else{
+    else {
+        fwrite(&qtdeProd, sizeof(int), 1, fp_prod);
         fwrite(produto, sizeof(Produto), qtdeProd, fp_prod);
         fclose(fp_prod);
-        printf("\nProduto salvo com sucesso!");
     }
 }
 
-void recupera_produtos(Produto *produto, int *qtdeProd) {
+Produto* recupera_produtos(Produto *produto, int *qtdeProd) {
 
     FILE *fp_prod;
-    fp_prod = fopen("Estoque de Produtos.txt", "r");
+    fp_prod = fopen("Estoque de Produtos.txt", "rb");
 
     if (fp_prod != NULL) {
-
-        produto = (Produto*)realloc(produto, *qtdeProd * sizeof(Produto));
-        size_t items_read = fread(produto, sizeof(Produto), *qtdeProd, fp_prod);
+        fread(qtdeProd, sizeof(int), 1, fp_prod);
+        produto = realloc(produto, *qtdeProd * sizeof(Produto));
+        fread(produto, sizeof(Produto), *qtdeProd, fp_prod);
         fclose(fp_prod);
-        printf("\nLista de produtos recuperada com sucesso!");
     }
+    return produto;
 }
 
-void salva_venda(Venda *venda, int *qtdeVendas){
+void salva_venda(Venda *venda, int qtdeVendas) {
     FILE *fp_vendas;
-    fp_vendas = fopen("VendasFeitas.txt", "w");
+    fp_vendas = fopen("Vendas Feitas.txt", "wb");
 
-    if(fp_vendas == NULL){
-        perror("\nNão foi possivel abrir o arquivo");
+    if(fp_vendas == NULL) {
+        perror("\nNao foi possivel abrir o arquivo");
     }
-    else{
-        fwrite(venda, sizeof(Venda), qtdeVendas, fp_vendas);
+
+    else {
+        fwrite(&qtdeVendas,sizeof(int),1,fp_vendas);
+        for(int i = 0; i < qtdeVendas; i++) {
+            fwrite(&venda[i],sizeof(Venda) - sizeof(Produto*),1,fp_vendas);
+            fwrite(venda[i].itens_comprados, sizeof(Produto),venda[i].qtde_itens, fp_vendas);
+        }
+
         fclose(fp_vendas);
-        printf("\nVenda salva com sucesso!");
     }
 }
 
-void recupera_vendas(Venda *venda, int *qtdeVendas){
-
-    *qtdeVendas = 0;
+Venda* recupera_vendas(Venda *venda, int *qtdeVendas) {
 
     FILE *fp_vendas;
-    fp_vendas = fopen("VendasFeitas.txt", "r");
+    fp_vendas = fopen("VendasFeitas.txt", "rb");
 
     if (fp_vendas != NULL) {
 
-        venda = (Venda*)realloc(venda,(*qtdeVendas)*sizeof(Venda));
+        fread(qtdeVendas, sizeof(int), 1, fp_vendas);
+        venda=realloc(venda, *qtdeVendas * sizeof(Venda));
+        for(int i = 0; i < *qtdeVendas; i++) {
+            fread(&venda[i],sizeof(Venda) - sizeof(Produto*),1,fp_vendas);
+            venda[i].itens_comprados = malloc(sizeof(Produto)*venda[i].qtde_itens);
+            fread(venda[i].itens_comprados,sizeof(Produto),venda[i].qtde_itens,fp_vendas);
+        }
 
-        size_t items_read = fread(venda, sizeof(Venda), *qtdeVendas, fp_vendas);
         fclose(fp_vendas);
-        printf("\nLista de vendas recuperada com sucesso!");
     }
+
+    return venda;
 }
+

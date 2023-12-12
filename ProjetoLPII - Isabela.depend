@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1702260193 source:c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\main.c
+1702424696 source:c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\main.c
 	<stdio.h>
 	<stdlib.h>
 	"arquivo.h"
@@ -8,27 +8,35 @@
 	"produto.c"
 	"vendas.h"
 	"vendas.c"
+	"estruturas.h"
 
-1702260053 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\arquivo.h
+1702424821 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\arquivo.h
 	"produto.h"
 	"vendas.h"
 
-1702259303 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\produto.h
+1702424819 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\produto.h
+	"estruturas.h"
 
-1702259671 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\vendas.h
+1702424816 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\vendas.h
+	"estruturas.h"
 
-1702260528 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\produto.c
+1702425036 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\produto.c
 	<stdlib.h>
 	<stdio.h>
 	"produto.h"
+	"estruturas.h"
 
-1702259879 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\arquivo.c
+1702424651 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\arquivo.c
 	<stdlib.h>
 	<stdio.h>
 	"arquivo.h"
 
-1702260087 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\vendas.c
+1702424754 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\vendas.c
 	<stdlib.h>
 	<stdio.h>
 	"vendas.h"
+	"estruturas.h"
+	<time.h>
+
+1702424910 c:\users\user\desktop\uesc\lp ii\projetolpii - isabela\estruturas.h
 

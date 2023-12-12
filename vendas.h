@@ -1,18 +1,9 @@
 #ifndef VENDAS_H_INCLUDED
 #define VENDAS_H_INCLUDED
+#include "estruturas.h"
 
-typedef struct Tvenda
-{
-    int codigoVenda;
-    int dia;
-    int mes;
-    int ano;
-    int hora;
-    int minutos;
-    int segundos;
-    int qtde_itens;
-    float valor_total;
+Venda *efetua_venda(Produto *produto,int qtdeProd, Venda *venda, int *qtde_vendas);
+void relatorio_faturamento(Venda *venda, int qtde_vendas);
 
-} Venda;
 
 #endif // VENDAS_H_INCLUDED

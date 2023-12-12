@@ -1,16 +1,16 @@
 /*
 *
-*    Este programa tem como objetivo permitir ao usuário de um sistema de loja
+*    Este programa tem como objetivo permitir ao usuï¿½rio de um sistema de loja
 *    que ele possa inserir produtos, atualizar a quantidade de itens de um produto no estoque,
-*    realizar uma venda com diversos produtos, consultar o preço, mostrar os produtos e sua quantidade
-*    em estoque e emitir um relatório de faturamento de vendas em um determinado periodo.
+*    realizar uma venda com diversos produtos, consultar o preÃ§o, mostrar os produtos e sua quantidade
+*    em estoque e emitir um relatï¿½rio de faturamento de vendas em um determinado periodo.
 *
 *    Isso deve ser feito de modo persistente e utilizar arquivos para armazenar os seus dados.
-*    Deverá ter arquivos diferentes para o armazenamento de produtos, estoque de itens de produto, e vendas.
-*    Deverá ser desenvolvido utilizando diferentes arquivos de código e cabeçalho.
+*    DeverÃ¡ ter arquivos diferentes para o armazenamento de produtos, estoque de itens de produto, e vendas.
+*    DeverÃ¡ ser desenvolvido utilizando diferentes arquivos de cï¿½digo e cabeÃ§alho.
 *
 *    Autora: Isabela Madureira
-*    Última atualização: 10/12/2023
+*    Ãšltima atualizaÃ§Ã£o: 12/12/2023
 *
 */
 
@@ -22,20 +22,21 @@
 #include "produto.c"
 #include "vendas.h"
 #include "vendas.c"
+#include "estruturas.h"
 
 int main() {
 
-    //declaração das variáveis
+    //declaraÃ§Ã£o das variÃ¡veis
     int opcao, qtdeProd = 0, qtdeVenda = 0;
-    Produto *produto = NULL;
-    Venda *venda = NULL;
+    Produto *produto = (Produto*)malloc(sizeof(Produto));
+    Venda *venda = (Venda*)malloc(sizeof(Venda));
 
-    //recebe as informações armazenadas no arquivo de produto e de venda
-    recupera_produtos(produto, &qtdeProd);
-    recupera_vendas(venda, &qtdeVenda);
+    //recebe as informaÃ§Ãµes armazenadas no arquivo de produto e de venda
+    produto = recupera_produtos(produto, &qtdeProd);
+    venda = recupera_vendas(venda, &qtdeVenda);
 
     do {
-        //menu e suas opções
+        //menu e suas opÃ§Ãµes
         printf("\n\t************************************************************************"
                "\n\t\t\t     SISTEMA DA LOJA A.I COMERCIAL\n"
                "\t************************************************************************"
@@ -54,14 +55,15 @@ int main() {
 
         printf("\n========================================================================================================================");
 
-        //acesso às opções do menu
+        //acesso Ã s opÃ§Ãµes do menu
         switch (opcao) {
 
             //sair do menu
             case 0:
             {
                 printf("\n\tMuito obrigada por utilizar nosso programa! Ate mais :)\n");
-                //limpeza do conteúdo da tela
+
+                //limpeza do conteÃºdo da tela
                 printf("\n\tPressione qualquer tecla para fechar o programa... \n");
                 exit(1);
             }
@@ -69,10 +71,9 @@ int main() {
             //inserir um produto
             case 1:
             {
-                insere_produto(produto, &qtdeProd);
-                salva_produto(produto, &qtdeProd);
+                produto = insere_produto(produto, &qtdeProd);
 
-                //limpeza do conteúdo da tela
+                //limpeza do conteÃºdo da tela
                 printf("\n\tPressione ENTER para continuar ");
                 scanf("%*c%*c");
                 system("clear||cls");
@@ -82,22 +83,21 @@ int main() {
             //atualizar a quantidade de itens de um produto no estoque
             case 2:
             {
-                atualiza_estoque(produto, &qtdeProd);
-                salva_produto(produto, &qtdeProd);
+                atualiza_estoque(produto, qtdeProd);
 
-                //limpeza do conteúdo da tela
-                printf("\n\tPressione ENTER para continuar ");
-                scanf("%*c%*c");
-                system("clear||cls");
+                //limpeza do conteÃºdo da tela
+                printf("\n Aperte ENTER para continuar ");
+                scanf("%*c");
+                system("clear || cls");
                 break;
             }
 
             //realizar uma venda
             case 3:
             {
-                printf("\nEsta opcao ainda nao esta disponivel...");
+                venda = efetua_venda(produto, qtdeProd, venda, &qtdeVenda);
 
-                //limpeza do conteúdo da tela
+                //limpeza do conteÃºdo da tela
                 printf("\n\tPressione ENTER para continuar ");
                 scanf("%*c%*c");
                 system("clear||cls");
@@ -110,7 +110,7 @@ int main() {
             {
                 consulta_preco(produto, &qtdeProd);
 
-                //limpeza do conteúdo da tela
+                //limpeza do conteÃºdo da tela
                 printf("\n\tPressione ENTER para continuar ");
                 scanf("%*c%*c");
                 system("clear||cls");
@@ -120,9 +120,9 @@ int main() {
             //mostrar na tela os produtos e a quantidade
             case 5:
             {
-                mostra_estoque(produto, &qtdeProd);
+                mostra_estoque(produto, qtdeProd);
 
-                //limpeza do conteúdo da tela
+                //limpeza do conteÃºdo da tela
                 printf("\n\tPressione ENTER para continuar ");
                 scanf("%*c%*c");
                 system("clear||cls");
@@ -132,9 +132,9 @@ int main() {
             //relatorio de faturamento de vendas em um determinado periodo
             case 6:
             {
-                printf("\nEsta opcao ainda nao esta disponivel...");
+                relatorio_faturamento(venda, qtdeVenda);
 
-                //limpeza do conteúdo da tela
+                //limpeza do conteudo da tela
                 printf("\n\tPressione ENTER para continuar ");
                 scanf("%*c%*c");
                 system("clear||cls");
@@ -145,16 +145,12 @@ int main() {
             {
                 printf("\n\tOpa, valor invalido para opcao! Escolha novamente... \n");
 
-                //limpeza do conteúdo da tela
+                //limpeza do conteÃºdo da tela
                 printf("\n\tPressione ENTER para continuar ");
                 scanf("%*c%*c");
                 system("clear||cls");
                 break;
             }
-        }
-
-        if (opcao!=0) {
-            printf("\n\tDeseja realizar mais alguma acao?\n");
         }
 
     } while(opcao!=0);
